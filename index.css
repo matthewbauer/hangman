@@ -10,6 +10,11 @@
 
 #hangingMan {
 	float: left;
+/*	display: inline-block;*/
+}
+
+#content {
+/*	display: inline-block;*/
 }
 
 #word {
@@ -18,4 +23,9 @@
 
 .bodyPart {
 	visibility: hidden;
+}
+
+#new {
+	display: inline;
+	margin-left: 15px;
 }

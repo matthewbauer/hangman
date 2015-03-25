@@ -50,16 +50,6 @@ function getWords() {
 	request.send();
 }
 
-function lose() {
-	$('#word').children().each(function(i) {
-		$(this).html(word[i]);
-	});
-	losses++;
-	if (confirm('You lose! Do you want to play again?')) {
-		restart();
-	}
-}
-
 function wrongGuess() {
 	$('#' + bodyParts.pop()).css('visibility', 'visible');
 	//$('#' + bodyParts.pop()).fadeTo(200, 1);
@@ -73,12 +63,20 @@ function updateWins() {
 	$('#losses').html(losses);
 }
 
+function lose() {
+	$('#word').children().each(function(i) {
+		$(this).html(word[i]);
+	});
+	losses++;
+	alert('You lost!')
+	$('#new').show();
+}
+
 function win() {
 	wins++;
 	updateWins();
-	if (confirm('You won! Do you want to play again?')) {
-		restart();
-	}
+	alert('You won!')
+	$('#new').show();
 }
 
 function guessLetter(letter) {
@@ -108,11 +106,7 @@ function createLetter(letter) {
 }
 
 function generateLetters() {
-	for (var n = 0; n < 13; n++) {
-		createLetter(String.fromCharCode(65 + n).toUpperCase());
-	}
-	$('#guesses').append($('<br/>'));
-	for (var n = 13; n < 26; n++) {
+	for (var n = 0; n < 26; n++) {
 		createLetter(String.fromCharCode(65 + n).toUpperCase());
 	}
 }
@@ -126,6 +120,7 @@ function restart() {
 	$('#word').empty();
 	$('#guesses').empty();
 	$('.bodyPart').css('visibility', 'hidden');
+	$('#new').hide();
 	getWords();
 	generateLetters();
 	updateWins();
